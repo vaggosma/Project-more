@@ -1,0 +1,66 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+          cd ../backend
+          npm install
+
+      - name: Build application
+        run: |
+          cd frontend
+          npm run build
+          cd ../backend
+          npm run build
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run tests
+        run: |
+          cd frontend
+          npm test
+          cd ../backend
+          npm test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to cloud (example with AWS)
+        run: |
+          echo "Deploying the app to the cloud provider"
+          # Add your deployment commands here (e.g., AWS CLI commands, Azure, GCP)
+          # This is an example of AWS deployment
+          aws s3 sync ./frontend/build s3://your-bucket-name --delete
+          aws s3 sync ./backend/build s3://your-bucket-name --delete
+          
+      - name: Manual approval step before deploying to production
+        run: echo "Approval is needed before deploying to production"
+        # Here, you can integrate with GitHub's manual approval actions if needed
