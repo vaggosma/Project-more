@@ -18,19 +18,26 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install dependencies
+      - name: Install dependencies (frontend)
         run: |
           cd frontend
           npm install
-          cd ../backend
+          
+      - name: Install dependencies (backend)
+        run: |
+          cd backend
           npm install
 
-      - name: Build application
+      # Optional: If you don't need build steps, skip them
+      - name: Build frontend (if needed)
         run: |
           cd frontend
-          npm run build
-          cd ../backend
-          npm run build
+          # Add build commands if any (currently not required for static HTML)
+          
+      - name: Build backend (if needed)
+        run: |
+          cd backend
+          # Add backend build steps if any
 
   test:
     runs-on: ubuntu-latest
@@ -39,12 +46,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run tests
+      - name: Run tests (if applicable)
         run: |
           cd frontend
-          npm test
+          # Add test commands if you have any
           cd ../backend
-          npm test
+          # Add backend test commands
 
   deploy:
     runs-on: ubuntu-latest
@@ -57,10 +64,10 @@ jobs:
         run: |
           echo "Deploying the app to the cloud provider"
           # Add your deployment commands here (e.g., AWS CLI commands, Azure, GCP)
-          # This is an example of AWS deployment
-          aws s3 sync ./frontend/build s3://your-bucket-name --delete
-          aws s3 sync ./backend/build s3://your-bucket-name --delete
+          # Example for AWS deployment
+          aws s3 sync ./frontend/ s3://your-bucket-name --delete
+          aws s3 sync ./backend/ s3://your-bucket-name --delete
           
       - name: Manual approval step before deploying to production
         run: echo "Approval is needed before deploying to production"
-        # Here, you can integrate with GitHub's manual approval actions if needed
+        # You can integrate GitHub's manual approval here
