@@ -1,10 +1,10 @@
 const express = require('express');
-const cors = require('cors');  // Import the CORS module
+const cors = require('cors'); 
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(cors());  // Enable CORS for all routes
+app.use(cors()); 
 
 app.get('/api/message', (req, res) => {
   res.json({ message: 'This is a test app' });
