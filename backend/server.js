@@ -7,7 +7,7 @@ const port = process.env.PORT || 3001;
 app.use(cors());  // Enable CORS for all routes
 
 app.get('/api/message', (req, res) => {
-  res.json({ message: 'Hello from the backend!' });
+  res.json({ message: 'Hello from the backend!How are you mate?' });
 });
 
 app.listen(port, () => {
