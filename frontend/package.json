@@ -4,7 +4,7 @@
   "description": "Frontend for the web app",
   "main": "index.html",
   "scripts": {
-    "start": "echo 'No build script required for HTML frontend.'"
+    "start": "echo 'No build script required for HTML frontend.'",
     "build": "echo 'No build process for a static HTML page' && exit 0"
   },
   "author": "",
