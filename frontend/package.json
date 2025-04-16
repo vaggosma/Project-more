@@ -4,9 +4,12 @@
   "description": "Frontend for the web app",
   "main": "index.html",
   "scripts": {
+    "build": "echo 'No build needed'",
     "start": "http-server . -p 1000"
-    
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
 }
