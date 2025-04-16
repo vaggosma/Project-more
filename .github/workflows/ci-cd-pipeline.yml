@@ -73,5 +73,11 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
             -H "Content-Type: application/json"
 
+            - name: Health check backend
+  run: |
+    echo "Checking backend health..."
+    curl -f https://devops-backend-veq9.onrender.com/health
+
+
       
      
