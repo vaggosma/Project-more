@@ -60,14 +60,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Deploy to cloud (example with AWS)
+      - name: Deploy frontend to Render
         run: |
-          echo "Deploying the app to the cloud provider"
-          # Add your deployment commands here (e.g., AWS CLI commands, Azure, GCP)
-          # Example for AWS deployment
-          aws s3 sync ./frontend/ s3://your-bucket-name --delete
-          aws s3 sync ./backend/ s3://your-bucket-name --delete
-          
+          curl -X POST https://api.render.com/v1/services/srv-cvvnajmuk2gs73dg1usg/deploy \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json"
+
+      - name: Deploy backend to Render
+        run: |
+          curl -X POST https://api.render.com/v1/services/srv-cvvmt6qdbo4c738b91k0/deploy \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json"
+
       - name: Manual approval step before deploying to production
         run: echo "Approval is needed before deploying to production"
-        # You can integrate GitHub's manual approval here
+        # You can integrate GitHub's manual approval here (optional)
