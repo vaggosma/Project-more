@@ -60,18 +60,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Deploy frontend to Render
-        run: |
-          curl -X POST https://api.render.com/v1/services/srv-cvvnajmuk2gs73dg1usg/deploy \
-            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
-            -H "Content-Type: application/json"
-
       - name: Deploy backend to Render
         run: |
           curl -X POST https://api.render.com/v1/services/srv-cvvmt6qdbo4c738b91k0/deploy \
             -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
             -H "Content-Type: application/json"
 
+      - name: Deploy frontend to Render
+        run: |
+          curl -X POST https://api.render.com/v1/services/srv-cvvnajmuk2gs73dg1usg/deploy \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json"
+
+      
       - name: Manual approval step before deploying to production
         run: echo "Approval is needed before deploying to production"
         # You can integrate GitHub's manual approval here (optional)
