@@ -74,6 +74,4 @@ jobs:
             -H "Content-Type: application/json"
 
       
-      - name: Manual approval step before deploying to production
-        run: echo "Approval is needed before deploying to production"
-        # You can integrate GitHub's manual approval here (optional)
+     
