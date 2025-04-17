@@ -28,16 +28,16 @@ jobs:
           cd backend
           npm install
 
-      # Optional: If you don't need build steps, skip them
+      
       - name: Build frontend (if needed)
         run: |
           cd frontend
-          # Add build commands if any (currently not required for static HTML)
+          
           
       - name: Build backend (if needed)
         run: |
           cd backend
-          # Add backend build steps if any
+          
 
   test:
     runs-on: ubuntu-latest
